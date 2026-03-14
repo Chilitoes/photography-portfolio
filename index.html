@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alston Shi — Travel and documentary photography across Asia. Japan, China, Malaysia, Singapore.">
+  <title>Alston Shi — Photography</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    /* ---- Hero ---- */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/Japan/IMG_2564.JPG');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s var(--ease-out);
+      filter: brightness(0.45);
+    }
+
+    .hero.loaded .hero-bg {
+      transform: scale(1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: var(--space-3);
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+    }
+
+    .hero-title {
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.5s forwards;
+      color: var(--color-text);
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .hero-tagline {
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-5);
+      color: rgba(232, 224, 208, 0.7);
+      font-size: var(--text-lg);
+      max-width: none;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.7s forwards;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.9s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: var(--space-4);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeUp 1s var(--ease-out) 1.4s both;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--color-accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Featured section ---- */
+    .featured {
+      background: var(--color-bg);
+      padding-block: 0;
+    }
+
+    .featured-header {
+      padding: var(--space-7) var(--space-3) var(--space-4);
+      max-width: var(--max-width);
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .featured-header { padding-inline: var(--space-5); }
+    }
+    @media (min-width: 1024px) {
+      .featured-header { padding-inline: var(--space-6); }
+    }
+
+    .featured-footer {
+      padding: var(--space-5) var(--space-3);
+      text-align: center;
+    }
+
+    /* ---- withluke-style image grid ---- */
+    .home-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+
+    .home-grid-item {
+      position: relative;
+      overflow: hidden;
+      height: 440px;
+      background: var(--color-surface);
+      display: block;
+      cursor: pointer;
+    }
+
+    .home-grid-item.wide { grid-column: span 2; }
+
+    .home-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out),
+                  filter 0.8s var(--ease-out);
+    }
+
+    .home-grid-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.6);
+    }
+
+    .home-grid-item-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .home-grid-item:hover .home-grid-item-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .home-grid-item-info h3 {
+      font-size: var(--text-lg);
+      color: var(--color-text);
+      font-weight: 400;
+    }
+
+    .home-grid-item-info span {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 1023px) {
+      .home-grid { grid-template-columns: repeat(2, 1fr); }
+      .home-grid-item { height: 300px; }
+      .home-grid-item.wide { grid-column: span 1; }
+    }
+
+    @media (max-width: 540px) {
+      .home-grid { grid-template-columns: 1fr; gap: 2px; }
+      .home-grid-item { height: 260px; }
+    }
+
+    /* ---- About teaser ---- */
+    .about-teaser {
+      background: var(--color-surface);
+    }
+
+    .about-teaser-inner {
+      display: grid;
+      gap: var(--space-5);
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .about-teaser-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-7);
+      }
+    }
+
+    .about-teaser-image {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+
+    .about-teaser-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+    }
+
+    .about-teaser-text h2 {
+      margin-block: var(--space-2);
+    }
+
+    .about-teaser-text p {
+      margin-bottom: var(--space-4);
+    }
+
+    .about-teaser-text p + p {
+      margin-top: var(--space-3);
+    }
+
+    /* ---- Philosophy strip ---- */
+    .philosophy {
+      text-align: center;
+      background: var(--color-bg);
+    }
+
+    .philosophy blockquote {
+      font-family: var(--font-heading);
+      font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.4;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .philosophy cite {
+      display: block;
+      margin-top: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      font-style: normal;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Alston Shi</a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" role="dialog" aria-label="Mobile menu">
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Est. 2020</p>
+      <h1 class="hero-title">Alston<br><em>Photography</em></h1>
+      <p class="hero-tagline">Travel and documentary photography — finding stillness in movement, and meaning in the overlooked.</p>
+      <div class="hero-cta">
+        <a href="portfolio.html" class="btn btn-primary">View Portfolio</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED ============ -->
+  <section class="featured">
+    <div class="featured-header" data-animate="fade-up">
+      <span class="label">Selected Work</span>
+      <h2>From the archive</h2>
+    </div>
+
+    <!-- withluke-style edge-to-edge grid -->
+    <div class="home-grid">
+
+      <!-- Row 1 -->
+      <a href="portfolio.html" class="home-grid-item wide">
+        <img src="images/Japan/IMG_5583.JPG" alt="Dotonbori canal at night, Osaka" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Dotonbori, Osaka</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/Japan/IMG_5305 2.JPG" alt="Rickshaw puller at torii gate with sakura, Kyoto" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Rickshaw, Kyoto</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/Japan/IMG_6785.JPG" alt="Neon izakaya corner at night" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Late Night Corner</h3>
+        </div>
+      </a>
+
+      <!-- Row 2 -->
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/China/DSCF8199.JPG" alt="Chinese interior with hexagonal window" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>China</span>
+          <h3>Hexagon Window</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/China/IMG_9089.JPG" alt="Woman offering incense at a temple" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>China</span>
+          <h3>Temple Incense</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item wide">
+        <img src="images/Japan/IMG_6090.JPG" alt="Cherry blossom canal lit up at night, Tokyo" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Sakura After Dark</h3>
+        </div>
+      </a>
+
+      <!-- Row 3 -->
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/Japan/IMG_6819 2.JPG" alt="Mario karts driving through Tokyo streets, aerial" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Street Karts, Tokyo</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/China/DSCF8511.JPG" alt="Traditional Chinese garden pavilion over a pond" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>China</span>
+          <h3>Garden Pavilion</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/Japan/IMG_5931.JPG" alt="Tsutenkaku tower above a busy Osaka street" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>Japan</span>
+          <h3>Tsutenkaku, Osaka</h3>
+        </div>
+      </a>
+      <a href="portfolio.html" class="home-grid-item">
+        <img src="images/China/IMG_7694.JPG" alt="Illuminated round heritage building, Shanghai" loading="lazy">
+        <div class="home-grid-item-info">
+          <span>China</span>
+          <h3>Shanghai Night</h3>
+        </div>
+      </a>
+
+    </div><!-- /home-grid -->
+
+    <div class="featured-footer" data-animate="fade-up">
+      <a href="portfolio.html" class="btn btn-outline">View All Work</a>
+    </div>
+  </section>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <section class="philosophy">
+    <div class="container">
+      <div data-animate="fade-up">
+        <blockquote>
+          "I don't look for extraordinary places. I look for ordinary places at extraordinary moments."
+          <cite>— Alston Shi</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT TEASER ============ -->
+  <section class="about-teaser">
+    <div class="container">
+      <div class="about-teaser-inner">
+        <div class="about-teaser-image" data-animate="fade-right">
+          <img src="images/alston shi/IMG_7403.jpg"
+               alt="Alston Shi"
+               loading="lazy">
+        </div>
+
+        <div class="about-teaser-text" data-animate="fade-left">
+          <span class="label">About the photographer</span>
+          <h2>Documenting Asia one frame at a time</h2>
+          <p>
+            I travel with a camera the way other people keep a journal — to slow things down and pay attention. From temple courtyards in China to cherry-blossom streets in Japan, I photograph the moments most people walk past.
+          </p>
+          <p>
+            My work is about proximity: getting close enough to a place that you stop being a tourist and start being a witness.
+          </p>
+          <a href="about.html" class="btn btn-outline" style="margin-top: var(--space-2)">Read My Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">Alston Shi</div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <p class="footer-copy">© 2026 Alston Shi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/nav.js"></script>
+  <script src="js/scroll-animations.js"></script>
+  <script>
+    // Hero image parallax & load animation
+    const hero = document.querySelector('.hero');
+    window.addEventListener('load', () => hero?.classList.add('loaded'));
+  </script>
+</body>
+</html>
