@@ -18,7 +18,7 @@
 }
 
 .nav.scrolled {
-  background-color: rgba(10, 10, 10, 0.85);
+  background-color: var(--color-nav);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom-color: var(--color-border);
@@ -146,6 +146,35 @@
 .nav-toggle.open span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
+
+/* ---- Theme toggle ---- */
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun  { display: none; }
+
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
 
 /* ---- Mobile menu ---- */
 
