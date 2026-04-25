@@ -1,0 +1,36 @@
+name: Migrate DreamHost Content (One-Time Setup)
+
+on:
+  workflow_dispatch
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Migrate existing content to /personal/
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          script: |
+            cd /home/alstonsjg/public_html
+
+            # Check current files
+            echo "Current files in public_html:"
+            ls -la
+
+            # Create personal directory if it doesn't exist
+            mkdir -p personal
+
+            # Move all files and folders to personal, except .htaccess and personal folder itself
+            echo "Moving files to personal/ directory..."
+            for item in *; do
+              if [[ "$item" != "personal" && "$item" != ".htaccess" ]]; then
+                mv "$item" "personal/$item" 2>/dev/null || true
+              fi
+            done
+
+            echo "Migration complete!"
+            echo "Final structure:"
+            ls -la
