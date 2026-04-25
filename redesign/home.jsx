@@ -151,20 +151,20 @@ function SwirlGallery({ onOpenLightbox, go }) {
     };
   }, []);
 
-  // Compute each card's position on a swirl path. Wider spread = consecutive
-  // cards overlap more, so they read as a denser, closer cluster.
+  // Each card lives through `spread` of the scroll. Smaller spread = less
+  // overlap = more breathing room between consecutive cards on screen.
   const getCardStyle = (i, n) => {
-    const spread = 0.62;
+    const spread = 0.38;
     const stagger = (1 - spread) / Math.max(1, n - 1);
     const local = (progress - i * stagger) / spread;
     const clamped = Math.max(-0.3, Math.min(1.3, local));
 
-    const x = 0 + clamped * 100; // vw, left -> right (tighter sweep)
+    const x = -2 + clamped * 104; // vw, left -> right
     const phase = i * 1.1;
-    const y = Math.sin(clamped * Math.PI * 2 + phase) * 6; // gentle arc
-    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 6;
+    const y = Math.sin(clamped * Math.PI * 2 + phase) * 12;
+    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 8;
     const center = Math.sin(clamped * Math.PI);
-    const scale = 0.88 + Math.max(0, center) * 0.28; // bigger overall
+    const scale = 0.78 + Math.max(0, center) * 0.34;
 
     let opacity = 1;
     if (clamped < 0) opacity = Math.max(0, 1 + clamped * 3);
@@ -184,6 +184,7 @@ function SwirlGallery({ onOpenLightbox, go }) {
         <div className="swirl-bg-orb o1"></div>
         <div className="swirl-bg-orb o2"></div>
         <div className="swirl-bg-orb o3"></div>
+        <div className="swirl-bg-orb o4"></div>
         <div className="swirl-bg-grid"></div>
       </div>
       <div className="swirl-sticky">

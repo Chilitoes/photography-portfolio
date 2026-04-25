@@ -46,54 +46,99 @@ body.theme-light {
   justify-content: center;
 }
 
-/* Soft ambient background */
+/* Soft ambient background — warm gradient base + drifting orbs + grid */
 .swirl-bg {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(200,162,101,0.18), transparent 65%),
+    radial-gradient(ellipse 70% 60% at 85% 70%, rgba(120,90,160,0.16), transparent 65%),
+    radial-gradient(ellipse 90% 80% at 50% 100%, rgba(80,130,160,0.14), transparent 60%),
+    linear-gradient(180deg, #15120E 0%, #0E0D0B 60%, #14110D 100%);
+}
+body.theme-light .swirl-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(166,122,60,0.18), transparent 65%),
+    radial-gradient(ellipse 70% 60% at 85% 70%, rgba(120,90,160,0.10), transparent 65%),
+    linear-gradient(180deg, #F2EDE3 0%, #EAE3D5 100%);
 }
 .swirl-bg-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.55;
+  filter: blur(70px);
+  opacity: 0.72;
   mix-blend-mode: screen;
 }
-body.theme-light .swirl-bg-orb { mix-blend-mode: multiply; opacity: 0.35; }
+body.theme-light .swirl-bg-orb { mix-blend-mode: multiply; opacity: 0.4; }
 .swirl-bg-orb.o1 {
-  width: 55vw; height: 55vw;
-  left: -10vw; top: -15vw;
-  background: radial-gradient(circle, rgba(200,162,101,0.55), transparent 70%);
+  width: 60vw; height: 60vw;
+  left: -12vw; top: -18vw;
+  background: radial-gradient(circle, rgba(212,170,108,0.75), transparent 70%);
   animation: orbDrift1 22s ease-in-out infinite alternate;
 }
 .swirl-bg-orb.o2 {
-  width: 60vw; height: 60vw;
-  right: -15vw; top: 20vh;
-  background: radial-gradient(circle, rgba(120,90,160,0.35), transparent 70%);
+  width: 64vw; height: 64vw;
+  right: -16vw; top: 18vh;
+  background: radial-gradient(circle, rgba(140,100,180,0.55), transparent 70%);
   animation: orbDrift2 28s ease-in-out infinite alternate;
 }
 .swirl-bg-orb.o3 {
-  width: 40vw; height: 40vw;
-  left: 30vw; bottom: -10vw;
-  background: radial-gradient(circle, rgba(80,130,160,0.35), transparent 70%);
+  width: 46vw; height: 46vw;
+  left: 28vw; bottom: -12vw;
+  background: radial-gradient(circle, rgba(90,150,180,0.55), transparent 70%);
   animation: orbDrift3 26s ease-in-out infinite alternate;
+}
+.swirl-bg-orb.o4 {
+  width: 38vw; height: 38vw;
+  right: 20vw; top: -8vw;
+  background: radial-gradient(circle, rgba(220,120,90,0.4), transparent 70%);
+  animation: orbDrift4 32s ease-in-out infinite alternate;
 }
 @keyframes orbDrift1 { to { transform: translate(12vw, 8vh); } }
 @keyframes orbDrift2 { to { transform: translate(-10vw, -8vh); } }
 @keyframes orbDrift3 { to { transform: translate(8vw, -12vh); } }
+@keyframes orbDrift4 { to { transform: translate(-8vw, 10vh); } }
 
 .swirl-bg-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
-  opacity: 0.4;
+    linear-gradient(rgba(232,224,208,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,224,208,0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+  opacity: 0.7;
+}
+body.theme-light .swirl-bg-grid {
+  background-image:
+    linear-gradient(rgba(42,37,32,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,37,32,0.08) 1px, transparent 1px);
+}
+
+/* Floating constellation dots — subtle, parallax via animation */
+.swirl-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(200,162,101,0.55) 1px, transparent 2px),
+    radial-gradient(circle at 78% 24%, rgba(232,224,208,0.4) 1px, transparent 2px),
+    radial-gradient(circle at 32% 72%, rgba(232,224,208,0.35) 1px, transparent 2px),
+    radial-gradient(circle at 88% 80%, rgba(200,162,101,0.5) 1px, transparent 2px),
+    radial-gradient(circle at 56% 42%, rgba(232,224,208,0.3) 1px, transparent 2px),
+    radial-gradient(circle at 8% 60%, rgba(200,162,101,0.4) 1px, transparent 2px),
+    radial-gradient(circle at 64% 88%, rgba(232,224,208,0.35) 1px, transparent 2px);
+  opacity: 0.85;
+  animation: dotsFade 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes dotsFade {
+  from { opacity: 0.55; }
+  to   { opacity: 0.95; }
 }
 
 .swirl-head {
@@ -118,12 +163,12 @@ body.theme-light .swirl-bg-orb { mix-blend-mode: multiply; opacity: 0.35; }
 .swirl-card {
   position: absolute;
   top: 50%; left: 50%;
-  width: 42vw;
-  max-width: 640px;
-  min-width: 340px;
+  width: 36vw;
+  max-width: 560px;
+  min-width: 320px;
   aspect-ratio: 4 / 5;
-  margin-top: -34vh;
-  margin-left: -21vw;
+  margin-top: -30vh;
+  margin-left: -18vw;
   pointer-events: auto;
   will-change: transform, opacity;
   transition: opacity 0.3s linear;
@@ -221,11 +266,41 @@ body.theme-light .swirl-card-inner {
   transform: scaleX(0);
   transition: transform 0.1s linear;
 }
-@media (max-width: 900px) {
-  .swirl { height: 520vh; }
-  .swirl-head { left: 22px; right: 22px; top: 100px; }
-  .swirl-card { width: 72vw; margin-left: -36vw; min-width: 0; }
-  .swirl-cta { right: 22px; bottom: 40px; }
+/* Tablet: medium card, slightly more vertical separation */
+@media (max-width: 1100px) {
+  .swirl { height: 500vh; }
+  .swirl-card {
+    width: 50vw;
+    max-width: 460px;
+    min-width: 280px;
+    margin-left: -25vw;
+    margin-top: -28vh;
+  }
+}
+
+/* Mobile: cards take most of the width, head stacks above the stage,
+   scroll zone gets longer so each card has more breathing room */
+@media (max-width: 720px) {
+  .swirl { height: 600vh; }
+  .swirl-head {
+    position: absolute;
+    top: 96px;
+    left: 22px;
+    right: 22px;
+    max-width: none;
+    gap: 10px;
+  }
+  .swirl-head .section-title { font-size: clamp(28px, 7vw, 44px); }
+  .swirl-card {
+    width: 78vw;
+    max-width: 380px;
+    min-width: 0;
+    margin-left: -39vw;
+    margin-top: -26vh;
+  }
+  .swirl-cta { right: 22px; bottom: 32px; }
+  .swirl-bg-grid { background-size: 48px 48px; }
+  .swirl-bg-orb { filter: blur(50px); }
 }
 
 /* Headline weight + tracking driven by Tweaks */
