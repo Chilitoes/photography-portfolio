@@ -56,8 +56,8 @@ function Home({ go, onOpenLightbox }) {
         </div>
       </section>
 
-      {/* Swirl gallery */}
-      <SwirlGallery onOpenLightbox={onOpenLightbox} go={go} />
+      {/* 3D carousel ring (replaces the swirl gallery) */}
+      <window.Cinematic3DCarousel onOpenLightbox={onOpenLightbox} />
 
       {/* Pull quote — same single line as the live site's philosophy block */}
       <section className="pull-quote" ref={quoteRef}>
@@ -100,144 +100,6 @@ function Home({ go, onOpenLightbox }) {
 
       <Footer go={go} />
     </div>
-  );
-}
-
-// ---- Swirl gallery: cards float left->right on a swirling path as you scroll ----
-function SwirlGallery({ onOpenLightbox, go }) {
-  const sectionRef = React.useRef(null);
-  const trackRef = React.useRef(null);
-  const [progress, setProgress] = React.useState(0);
-
-  // Multiple cards per country, pinned by image path so it stays stable
-  // across data edits. Mixed order keeps the scroll varied.
-  const cards = React.useMemo(() => {
-    const picks = [
-      "Japan/IMG_6090.JPG",       // Sakura After Dark
-      "China/DSCF8199.JPG",       // Hexagon Window
-      "Taiwan/IMG_4112.jpeg",     // Taiwan, Taipei
-      "Japan/IMG_5583.JPG",       // Dotonbori, Osaka
-      "Malaysia/DSCF1062.JPG",    // KL Skyline
-      "China/DSCF8511.JPG",       // Garden Pavilion
-      "Singapore/IMG_6462.JPG",   // Tropical Garden
-      "Taiwan/IMG_4169.jpeg",     // Taiwan, Jiufen
-      "Japan/IMG_0393.JPG",       // Torii Gate, Hakone
-      "Brunei/IMG_7969.jpeg",     // Brunei
-      "China/IMG_9089.JPG",       // Temple Incense
-      "Malaysia/DSCF1058.JPG",    // Steel Arch Bridge
-      "Brunei/IMG_8029.jpeg",     // Brunei
-      "Japan/IMG_6785.JPG",       // Late Night Corner
-    ];
-    return picks.map((p) => window.PORTFOLIO_BY_FILE[p]).filter(Boolean);
-  }, []);
-
-  // Track scroll progress through this section
-  React.useEffect(() => {
-    const onScroll = () => {
-      const sec = sectionRef.current;
-      if (!sec) return;
-      const r = sec.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const total = sec.offsetHeight - vh;
-      const p = Math.max(0, Math.min(1, -r.top / total));
-      setProgress(p);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
-  // Each card lives through `spread` of the scroll. Smaller spread = less
-  // overlap = more breathing room between consecutive cards on screen.
-  const getCardStyle = (i, n) => {
-    const spread = 0.38;
-    const stagger = (1 - spread) / Math.max(1, n - 1);
-    const local = (progress - i * stagger) / spread;
-    const clamped = Math.max(-0.3, Math.min(1.3, local));
-
-    const x = -2 + clamped * 104; // vw, left -> right
-    const phase = i * 1.1;
-    const y = Math.sin(clamped * Math.PI * 2 + phase) * 12;
-    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 8;
-    const center = Math.sin(clamped * Math.PI);
-    const scale = 0.78 + Math.max(0, center) * 0.34;
-
-    let opacity = 1;
-    if (clamped < 0) opacity = Math.max(0, 1 + clamped * 3);
-    else if (clamped > 1) opacity = Math.max(0, 1 - (clamped - 1) * 3);
-    const z = Math.round(scale * 100);
-
-    return {
-      transform: `translate3d(${x}vw, ${y}vh, 0) rotate(${rot}deg) scale(${scale})`,
-      opacity,
-      zIndex: z,
-    };
-  };
-
-  return (
-    <section className="swirl" ref={sectionRef}>
-      <div className="swirl-bg" aria-hidden="true">
-        <div className="swirl-bg-orb o1"></div>
-        <div className="swirl-bg-orb o2"></div>
-        <div className="swirl-bg-orb o3"></div>
-        <div className="swirl-bg-orb o4"></div>
-        <div className="swirl-bg-grid"></div>
-      </div>
-      <div className="swirl-sticky">
-        <div className="swirl-head">
-          <div className="label">Selected Work</div>
-          <h2 className="section-title">
-            From the <span className="italic">archive.</span>
-          </h2>
-        </div>
-
-        <div className="swirl-stage" ref={trackRef}>
-          {cards.map((item, i) => {
-            const fullIdx = window.PORTFOLIO.findIndex((p) => p.id === item.id);
-            return (
-              <div
-                key={item.id}
-                className="swirl-card"
-                style={getCardStyle(i, cards.length)}
-              >
-                <div
-                  className="swirl-card-inner"
-                  onClick={() => onOpenLightbox(fullIdx)}
-                  data-cursor="view"
-                  data-cursor-label="Open"
-                >
-                  <div className="swirl-card-img" style={{ backgroundImage: `url(${item.src})` }} />
-                  <div className="swirl-card-overlay">
-                    <div className="swirl-card-idx label">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</div>
-                    <div className="swirl-card-text">
-                      <div className="label ochre">{item.country}</div>
-                      <div className="swirl-card-title serif">{item.city}</div>
-                      <div className="swirl-card-sub label">{item.title}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="swirl-cta">
-          <a className="btn-arrow" href="#/portfolio" data-cursor="hover"
-             onClick={(e) => { e.preventDefault(); go("portfolio"); }}>
-            View All Work
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-
-        <div className="swirl-progress">
-          <div className="swirl-progress-fill" style={{ transform: `scaleX(${progress})` }} />
-        </div>
-      </div>
-    </section>
   );
 }
 
