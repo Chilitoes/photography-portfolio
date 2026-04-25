@@ -153,43 +153,14 @@ window.PORTFOLIO_BY_FILE = Object.fromEntries(
 // Hero image: same shot the live site uses on home
 window.HERO_IMG = IMG("Japan/IMG_2564.JPG");
 
-// Portrait for About: same shot the live about page uses
-window.PORTRAIT_IMG = IMG("alston shi/IMG_7403.jpg");
+// Portrait for the About page (and home teaser).
+// Switched to _MG_5717.jpeg for the about page; IMG_7403.jpg used on home.
+window.PORTRAIT_IMG = IMG("alston shi/_MG_5717.jpeg");
+window.PORTRAIT_IMG_HOME = IMG("alston shi/IMG_7403.jpg");
 window.PORTRAIT_IMG_SECONDARY = IMG("alston shi/IMG_1014.jpg");
 
 // Filter labels (match the live portfolio's category set)
 window.COUNTRIES = ["All", "Japan", "China", "Taiwan", "Malaysia", "Singapore", "Brunei"];
-
-// Cinematic ticker cities — kept available even though the marquee was removed.
-window.MARQUEE_CITIES = [
-  "TOKYO", "KYOTO", "OSAKA",
-  "SHANGHAI", "BEIJING", "SUZHOU",
-  "TAIPEI", "JIUFEN",
-  "KUALA LUMPUR",
-  "SINGAPORE",
-  "BANDAR SERI BEGAWAN",
-];
-
-// Home grid layout (legacy — Home now uses the swirl gallery)
-window.HOME_LAYOUT = [];
-
-// About timeline — anchored to the user's real countries
-window.TIMELINE = [
-  { year: "2020", place: "Tokyo",                line: "First trip, first real frames.",                src: IMG("Japan/IMG_2564.JPG") },
-  { year: "2022", place: "Suzhou",               line: "A summer of hexagon windows.",                  src: IMG("China/DSCF8199.JPG") },
-  { year: "2023", place: "Kuala Lumpur",         line: "Steel arch bridge after the rain.",             src: IMG("Malaysia/DSCF1058.JPG") },
-  { year: "2024", place: "Singapore",            line: "Home base — the tropical garden.",              src: IMG("Singapore/IMG_6462.JPG") },
-  { year: "2024", place: "Bandar Seri Begawan",  line: "A quiet mosque at noon. Nobody around.",        src: IMG("Brunei/IMG_7969.jpeg") },
-  { year: "2025", place: "Taipei",               line: "Lanterns, scooters, late noodles.",             src: IMG("Taiwan/IMG_4112.jpeg") },
-];
-
-// About-page bio paragraphs (real copy from index + about pages)
-window.BIO = [
-  "I shoot travel, and people too — events, portraits, the moments worth holding onto. Different subjects, same instinct. Based in Singapore.",
-  "I travel with a camera the way other people keep a journal — to slow things down and pay attention. From temple courtyards in China to cherry-blossom streets in Japan, I photograph the moments most people walk past.",
-  "My work is about proximity: getting close enough to a place that you stop being a tourist and start being a witness.",
-  "Available for travel, editorial, and event shoots. For prints or commissions, write.",
-];
 
 // Gear (from the live About page)
 window.GEAR = [

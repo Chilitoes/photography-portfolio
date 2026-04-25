@@ -51,28 +51,17 @@ function SideMeta({ route }) {
 
 function Footer({ go }) {
   return (
-    <footer className="site-footer">
-      <div className="big">
-        Let's start <br /><span className="italic">something.</span>
-      </div>
-      <div style={{ display: "flex", gap: 80, flexWrap: "wrap" }}>
-        <div className="col">
-          <div className="label">Contact</div>
-          <a href="mailto:alstonjpeg@gmail.com" data-cursor="hover">alstonjpeg@gmail.com</a>
-          <a href="https://instagram.com/alstonsjpeg" target="_blank" rel="noopener" data-cursor="hover">@alstonsjpeg</a>
-        </div>
-        <div className="col">
-          <div className="label">Navigate</div>
-          <a href="#/portfolio" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("portfolio"); }}>Portfolio</a>
-          <a href="#/about" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("about"); }}>About</a>
-          <a href="#/contact" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("contact"); }}>Contact</a>
-        </div>
-        <div className="col">
-          <div className="label">Based in</div>
-          <div>Singapore — available worldwide</div>
-          <div className="dim">© 2026 Alston Shi. All rights reserved.</div>
-        </div>
-      </div>
+    <footer className="site-footer site-footer-simple">
+      <a className="footer-brand-mark" href="#/home" data-cursor="hover"
+         onClick={(e) => { e.preventDefault(); go("home"); }}>
+        Alston <span className="italic">Shi</span>
+      </a>
+      <nav className="footer-nav" aria-label="Footer navigation">
+        <a href="#/portfolio" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("portfolio"); }}>Portfolio</a>
+        <a href="#/about" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("about"); }}>About</a>
+        <a href="#/contact" data-cursor="hover" onClick={(e) => { e.preventDefault(); go("contact"); }}>Contact</a>
+      </nav>
+      <div className="footer-copy dim">© 2026 Alston Shi. All rights reserved.</div>
     </footer>
   );
 }

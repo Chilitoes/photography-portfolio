@@ -37,8 +37,7 @@ function Home({ go, onOpenLightbox }) {
         <div className="hero-content">
           <div className="stagger">
             <div className="hero-meta">
-              <span className="label">N° 01 — Index</span>
-              <span className="label">Photography · Est. 2020</span>
+              <span className="label">Est. 2020</span>
             </div>
             <h1 className="hero-title">
               Alston <span className="last">Shi</span>
@@ -46,20 +45,22 @@ function Home({ go, onOpenLightbox }) {
             <p className="hero-tagline">
               I photograph places. I photograph people. <span className="em">Sometimes both at once.</span>
             </p>
+            <div style={{ marginTop: 36 }}>
+              <a className="btn-arrow" href="#/portfolio" data-cursor="hover"
+                 onClick={(e) => { e.preventDefault(); go("portfolio"); }}>
+                View Portfolio
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="scroll-indicator">
-          <span className="label">Scroll</span>
-          <div className="scroll-line"></div>
         </div>
       </section>
 
       {/* Swirl gallery */}
       <SwirlGallery onOpenLightbox={onOpenLightbox} go={go} />
 
-      {/* Pull quote */}
+      {/* Pull quote — same single line as the live site's philosophy block */}
       <section className="pull-quote" ref={quoteRef}>
-        <div className="label" style={{ marginBottom: 36 }}>On practice</div>
         <p className="pull-quote-text">
           {"I don't look for extraordinary places."
             .split(" ")
@@ -71,19 +72,15 @@ function Home({ go, onOpenLightbox }) {
             .map((w, i) => <span key={"b" + i} className="w">{w}&nbsp;</span>)}
           </span>
         </p>
-        <div className="pull-quote-attr">
-          <span className="rule"></span>
-          <span className="label">Alston Shi, a notebook entry, 2023</span>
-        </div>
       </section>
 
       {/* About teaser */}
       <section className="split">
         <div className="split-img reveal-img">
-          <div className="split-img-inner" style={{ backgroundImage: `url(${window.PORTRAIT_IMG})` }} />
+          <div className="split-img-inner" style={{ backgroundImage: `url(${window.PORTRAIT_IMG_HOME || window.PORTRAIT_IMG})` }} />
         </div>
         <div className="split-text reveal">
-          <div className="label">N° 03 — About the photographer</div>
+          <div className="label" style={{ color: "var(--ochre)" }}>About the photographer</div>
           <h2>
             Stories from the road <br /><span className="italic">and closer to home.</span>
           </h2>
@@ -95,7 +92,7 @@ function Home({ go, onOpenLightbox }) {
           </p>
           <a className="btn-arrow" href="#/about" data-cursor="hover"
              onClick={(e) => { e.preventDefault(); go("about"); }}>
-            Read my story
+            Read My Story
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -157,17 +154,17 @@ function SwirlGallery({ onOpenLightbox, go }) {
   // Compute each card's position on a swirl path. Wider spread = consecutive
   // cards overlap more, so they read as a denser, closer cluster.
   const getCardStyle = (i, n) => {
-    const spread = 0.55;
+    const spread = 0.62;
     const stagger = (1 - spread) / Math.max(1, n - 1);
     const local = (progress - i * stagger) / spread;
     const clamped = Math.max(-0.3, Math.min(1.3, local));
 
-    const x = -4 + clamped * 108; // vw, left -> right (a touch tighter)
+    const x = 0 + clamped * 100; // vw, left -> right (tighter sweep)
     const phase = i * 1.1;
-    const y = Math.sin(clamped * Math.PI * 2 + phase) * 9; // gentler arc
-    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 8;
+    const y = Math.sin(clamped * Math.PI * 2 + phase) * 6; // gentle arc
+    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 6;
     const center = Math.sin(clamped * Math.PI);
-    const scale = 0.82 + Math.max(0, center) * 0.32; // bigger floor, similar peak
+    const scale = 0.88 + Math.max(0, center) * 0.28; // bigger overall
 
     let opacity = 1;
     if (clamped < 0) opacity = Math.max(0, 1 + clamped * 3);
@@ -191,11 +188,10 @@ function SwirlGallery({ onOpenLightbox, go }) {
       </div>
       <div className="swirl-sticky">
         <div className="swirl-head">
-          <div className="label">N° 02 — Selected Work</div>
+          <div className="label">Selected Work</div>
           <h2 className="section-title">
-            Across Asia, <span className="italic">in motion.</span>
+            From the <span className="italic">archive.</span>
           </h2>
-          <div className="label dim">Scroll · hover to see where</div>
         </div>
 
         <div className="swirl-stage" ref={trackRef}>
@@ -231,7 +227,7 @@ function SwirlGallery({ onOpenLightbox, go }) {
         <div className="swirl-cta">
           <a className="btn-arrow" href="#/portfolio" data-cursor="hover"
              onClick={(e) => { e.preventDefault(); go("portfolio"); }}>
-            All work
+            View All Work
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>

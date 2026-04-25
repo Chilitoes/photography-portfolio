@@ -24,10 +24,8 @@ function Portfolio({ go, onOpenLightbox }) {
   return (
     <div className="page">
       <header className="portfolio-head">
-        <div className="label reveal in">N° 02 — Portfolio · {items.length} Frames</div>
-        <h1 className="portfolio-title reveal in">
-          The <span className="italic">archive.</span>
-        </h1>
+        <div className="label reveal in" style={{ color: "var(--ochre)" }}>Selected Work</div>
+        <h1 className="portfolio-title reveal in">Portfolio</h1>
 
         <div className="meta-row">
           <div className="filters" ref={pillsRef}>

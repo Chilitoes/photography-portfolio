@@ -23,15 +23,10 @@ function About({ go, onOpenLightbox }) {
         <div className="about-portrait">
           <div className="about-portrait-img" style={{ backgroundImage: `url(${window.PORTRAIT_IMG})` }} />
           <div className="about-portrait-grain"></div>
-          {window.PORTRAIT_IMG_SECONDARY && (
-            <div className="about-portrait-secondary"
-                 style={{ backgroundImage: `url(${window.PORTRAIT_IMG_SECONDARY})` }} />
-          )}
         </div>
         <div className="about-body">
-          <div className="label reveal in">N° 03 — About</div>
           <h1 className="reveal in">
-            Alston <br /><span className="italic">Shi.</span>
+            Alston <br /><span className="italic">Shi</span>
           </h1>
           <div className="label" style={{ color: "var(--ochre)" }}>Photographer</div>
 
@@ -53,7 +48,7 @@ function About({ go, onOpenLightbox }) {
           <div className="about-ctas reveal">
             <a className="btn-arrow" href="#/contact" data-cursor="hover"
                onClick={(e) => { e.preventDefault(); go("contact"); }}>
-              Get in touch
+              Get in Touch
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
             <a className="about-social-link" href="https://instagram.com/alstonsjpeg"

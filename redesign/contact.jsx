@@ -40,11 +40,9 @@ function Contact({ go }) {
   return (
     <div className="page contact">
       <div className="contact-head">
-        <div className="label reveal in" style={{ marginBottom: 28 }}>N° 04 — Contact</div>
-        <h1>
-          Let's start <br /><span className="italic">a conversation.</span>
-        </h1>
-        <p className="label dim" style={{ marginTop: 24, letterSpacing: "0.18em" }}>
+        <div className="label reveal in" style={{ marginBottom: 24, color: "var(--ochre)" }}>Get in touch</div>
+        <h1>Contact</h1>
+        <p style={{ marginTop: 24, fontFamily: "var(--serif)", fontSize: "clamp(20px, 2vw, 28px)", color: "var(--fg-dim)" }}>
           Available for travel, editorial, and event shoots.
         </p>
       </div>
