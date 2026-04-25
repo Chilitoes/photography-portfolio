@@ -73,10 +73,10 @@ function Cinematic3DCarousel({ onOpenLightbox }) {
 
     const x = Math.sin(rad);
     const z = Math.cos(rad); // 1 = front, -1 = back
-    const y = Math.sin(rad * 2) * 40; // ±40px vertical wave
+    const y = Math.sin(rad * 2) * 55; // ±55px vertical wave
 
-    const RADIUS_X = 480;
-    const RADIUS_Z = 350;
+    const RADIUS_X = 600;
+    const RADIUS_Z = 420;
 
     const tx = x * RADIUS_X;
     const tz = z * RADIUS_Z;
