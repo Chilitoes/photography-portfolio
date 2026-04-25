@@ -11,11 +11,25 @@ function About({ go }) {
         <div className="about-body">
           <div className="label reveal in">N° 03 — About</div>
           <h1 className="reveal in">
-            On seeing, <br /><span className="italic">on staying.</span>
+            Alston <br /><span className="italic">Shi.</span>
           </h1>
+          <div className="label" style={{ color: "var(--ochre)" }}>Photographer · Based in Singapore</div>
           <div className="para">
             {window.BIO.map((p, i) => <p key={i}>{p}</p>)}
           </div>
+        </div>
+      </section>
+
+      {/* Gear */}
+      <section className="section about-gear-section">
+        <div className="section-head reveal">
+          <h2 className="section-title">In the <span className="italic">bag.</span></h2>
+          <div className="label">Gear</div>
+        </div>
+        <div className="gear-tags reveal">
+          {window.GEAR.map((g, i) => (
+            <span key={i} className="gear-tag">{g}</span>
+          ))}
         </div>
       </section>
 
@@ -39,42 +53,6 @@ function About({ go }) {
                 <div className="label" style={{ color: "#C8A265" }}>{t.year} · {t.place}</div>
                 <div className="big">{t.line}</div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Credits / Clients */}
-      <section className="section">
-        <div className="section-head reveal">
-          <h2 className="section-title">Selected <span className="italic">press</span> &amp; clients</h2>
-          <div className="label">2019 — 2025</div>
-        </div>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 1,
-          border: "1px solid var(--line)",
-          background: "var(--line)",
-        }}>
-          {[
-            "Condé Nast Traveler", "It's Nice That", "Kinfolk",
-            "Monocle", "Lonely Planet", "The New Paper",
-            "Gillman Barracks", "Leica Gallery Singapore",
-          ].map((c, i) => (
-            <div key={i}
-                 className="reveal-img"
-                 style={{
-                   padding: "46px 24px",
-                   background: "var(--bg)",
-                   fontFamily: "var(--serif)",
-                   fontSize: 22,
-                   fontWeight: 300,
-                   letterSpacing: "-0.01em",
-                   textAlign: "center",
-                   opacity: 0.8,
-                 }}>
-              {c}
             </div>
           ))}
         </div>

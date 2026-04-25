@@ -53,13 +53,13 @@ function Footer({ go }) {
   return (
     <footer className="site-footer">
       <div className="big">
-        Let's make <br /><span className="italic">something.</span>
+        Let's start <br /><span className="italic">something.</span>
       </div>
       <div style={{ display: "flex", gap: 80, flexWrap: "wrap" }}>
         <div className="col">
           <div className="label">Contact</div>
           <a href="mailto:alstonjpeg@gmail.com" data-cursor="hover">alstonjpeg@gmail.com</a>
-          <a href="https://instagram.com/alstonsjpeg" data-cursor="hover">@alstonsjpeg</a>
+          <a href="https://instagram.com/alstonsjpeg" target="_blank" rel="noopener" data-cursor="hover">@alstonsjpeg</a>
         </div>
         <div className="col">
           <div className="label">Navigate</div>
@@ -69,8 +69,8 @@ function Footer({ go }) {
         </div>
         <div className="col">
           <div className="label">Based in</div>
-          <div>Singapore · Kyoto</div>
-          <div className="dim">All rights reserved, MMXXV</div>
+          <div>Singapore — available worldwide</div>
+          <div className="dim">© 2026 Alston Shi. All rights reserved.</div>
         </div>
       </div>
     </footer>

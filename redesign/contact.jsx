@@ -42,47 +42,47 @@ function Contact({ go }) {
       <div className="contact-head">
         <div className="label reveal in" style={{ marginBottom: 28 }}>N° 04 — Contact</div>
         <h1>
-          Let's make <br /><span className="italic">something.</span>
+          Let's start <br /><span className="italic">a conversation.</span>
         </h1>
+        <p className="label dim" style={{ marginTop: 24, letterSpacing: "0.18em" }}>
+          Available for travel, editorial, and event shoots.
+        </p>
       </div>
 
       <div className="contact-grid">
         <form className="contact-form" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
-          <Field label="Name" name="name" placeholder="Who's writing?" />
-          <Field label="Email" name="email" type="email" placeholder="Where should I reply?" />
-          <Field label="Project" name="project" placeholder="Editorial · prints · commission · hello" />
-          <Field label="Message" name="message" placeholder="Tell me the shape of it." as="textarea" />
+          <Field label="Name" name="name" placeholder="Your name" />
+          <Field label="Email" name="email" type="email" placeholder="your@email.com" />
+          <Field label="Project type" name="project" placeholder="Editorial · travel · personal · print · other" />
+          <Field label="Message" name="message" placeholder="Tell me about your project — timeline, location, vision..." as="textarea" />
           <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
             <MagneticButton onClick={(e) => { e.preventDefault(); setSent(true); }}>
-              {sent ? "Sent — thank you" : "Send note"}
+              {sent ? "Sent — thank you" : "Send message"}
             </MagneticButton>
-            <div className="label dim">Replies in 48h, usually.</div>
+            <div className="label dim">Replies within 48 hours.</div>
           </div>
         </form>
 
         <aside className="contact-side">
           <div className="group">
-            <div className="label">Direct</div>
+            <div className="label">Email</div>
             <a href="mailto:alstonjpeg@gmail.com" data-cursor="hover">
               <div className="v">alstonjpeg@gmail.com</div>
             </a>
           </div>
           <div className="group">
-            <div className="label">Elsewhere</div>
+            <div className="label">Based in</div>
+            <div className="v serif">Singapore — available worldwide</div>
+          </div>
+          <div className="group">
+            <div className="label">Response time</div>
+            <div className="v serif">Within 48 hours</div>
+          </div>
+          <div className="group">
+            <div className="label">Find me on</div>
             <div className="socials">
-              <a className="social-chip" href="https://instagram.com/alstonsjpeg" data-cursor="hover">Instagram / @alstonsjpeg</a>
-              <a className="social-chip" href="#" data-cursor="hover">Are.na</a>
-              <a className="social-chip" href="#" data-cursor="hover">VSCO</a>
-            </div>
-          </div>
-          <div className="group">
-            <div className="label">Based</div>
-            <div className="v serif">Singapore · Kyoto</div>
-          </div>
-          <div className="group">
-            <div className="label">Representation</div>
-            <div className="dim" style={{ fontFamily: "var(--serif)", fontSize: 18 }}>
-              Available for editorial, brand, and travel commissions across Asia. Print enquiries welcome.
+              <a className="social-chip" href="https://instagram.com/alstonsjpeg" target="_blank" rel="noopener" data-cursor="hover">Instagram / @alstonsjpeg</a>
+              <a className="social-chip" href="mailto:alstonjpeg@gmail.com" data-cursor="hover">Email</a>
             </div>
           </div>
         </aside>

@@ -38,7 +38,7 @@ function Home({ go, onOpenLightbox }) {
           <div className="stagger">
             <div className="hero-meta">
               <span className="label">N° 01 — Index</span>
-              <span className="label">Photography / MMXVIII — MMXXV</span>
+              <span className="label">Photography · Est. 2020</span>
             </div>
             <h1 className="hero-title">
               Alston <span className="last">Shi</span>
@@ -83,16 +83,19 @@ function Home({ go, onOpenLightbox }) {
           <div className="split-img-inner" style={{ backgroundImage: `url(${window.PORTRAIT_IMG})` }} />
         </div>
         <div className="split-text reveal">
-          <div className="label">N° 03 — The Photographer</div>
+          <div className="label">N° 03 — About the photographer</div>
           <h2>
-            A slow eye, <br /><span className="italic">a quiet room.</span>
+            Stories from the road <br /><span className="italic">and closer to home.</span>
           </h2>
           <p>
-            Based between Singapore and Kyoto. Ten years of walking cities at odd hours with a small camera and a small notebook.
+            I travel with a camera the way other people keep a journal — to slow things down and pay attention. From temple courtyards in China to cherry-blossom streets in Japan, I photograph the moments most people walk past.
+          </p>
+          <p>
+            My work is about proximity: getting close enough to a place that you stop being a tourist and start being a witness.
           </p>
           <a className="btn-arrow" href="#/about" data-cursor="hover"
              onClick={(e) => { e.preventDefault(); go("about"); }}>
-            Read more
+            Read my story
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -109,17 +112,17 @@ function SwirlGallery({ onOpenLightbox, go }) {
   const trackRef = React.useRef(null);
   const [progress, setProgress] = React.useState(0);
 
-  // One card per country
+  // One card per country, pinned by image path so it stays stable across data edits
   const cards = React.useMemo(() => {
     const picks = [
-      { country: "Japan",     id: "jp-04" },
-      { country: "China",     id: "cn-06" },
-      { country: "Malaysia",  id: "my-01" },
-      { country: "Singapore", id: "sg-01" },
+      "Japan/IMG_6090.JPG",       // Sakura After Dark
+      "China/DSCF8199.JPG",       // Hexagon Window
+      "Taiwan/IMG_4112.jpeg",     // Taiwan
+      "Malaysia/DSCF1062.JPG",    // KL Skyline
+      "Singapore/IMG_6462.JPG",   // Tropical Garden
+      "Brunei/IMG_7969.jpeg",     // Brunei
     ];
-    return picks
-      .map((p) => window.PORTFOLIO.find((x) => x.id === p.id))
-      .filter(Boolean);
+    return picks.map((p) => window.PORTFOLIO_BY_FILE[p]).filter(Boolean);
   }, []);
 
   // Track scroll progress through this section
@@ -180,7 +183,7 @@ function SwirlGallery({ onOpenLightbox, go }) {
         <div className="swirl-head">
           <div className="label">N° 02 — Selected Work</div>
           <h2 className="section-title">
-            Four countries, <span className="italic">in motion.</span>
+            Across Asia, <span className="italic">in motion.</span>
           </h2>
           <div className="label dim">Scroll · hover to see where</div>
         </div>
@@ -202,11 +205,11 @@ function SwirlGallery({ onOpenLightbox, go }) {
                 >
                   <div className="swirl-card-img" style={{ backgroundImage: `url(${item.src})` }} />
                   <div className="swirl-card-overlay">
-                    <div className="swirl-card-idx label">{String(i + 1).padStart(2, "0")} / 0{cards.length}</div>
+                    <div className="swirl-card-idx label">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</div>
                     <div className="swirl-card-text">
                       <div className="label ochre">{item.country}</div>
                       <div className="swirl-card-title serif">{item.city}</div>
-                      <div className="swirl-card-sub label">{item.title} · {item.year}</div>
+                      <div className="swirl-card-sub label">{item.title}</div>
                     </div>
                   </div>
                 </div>

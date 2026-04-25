@@ -1259,6 +1259,25 @@ footer.site-footer {
 }
 .social-chip:hover { background: var(--ochre); color: #0E0D0B; border-color: var(--ochre); }
 
+/* ===== Gear tags (About) ===== */
+.about-gear-section .gear-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 760px;
+}
+.gear-tag {
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+.gear-tag:hover { color: var(--fg); border-color: var(--ochre); }
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
