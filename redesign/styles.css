@@ -34,7 +34,7 @@ body.theme-light {
 /* ===== Swirl gallery ===== */
 .swirl {
   position: relative;
-  height: 260vh; /* shorter, tighter scroll zone */
+  height: 460vh; /* longer scroll zone — more time per card */
 }
 .swirl-sticky {
   position: sticky;
@@ -118,12 +118,12 @@ body.theme-light .swirl-bg-orb { mix-blend-mode: multiply; opacity: 0.35; }
 .swirl-card {
   position: absolute;
   top: 50%; left: 50%;
-  width: 24vw;
-  max-width: 360px;
-  min-width: 240px;
+  width: 34vw;
+  max-width: 520px;
+  min-width: 300px;
   aspect-ratio: 4 / 5;
-  margin-top: -24vh;
-  margin-left: -12vw;
+  margin-top: -30vh;
+  margin-left: -17vw;
   pointer-events: auto;
   will-change: transform, opacity;
   transition: opacity 0.3s linear;
@@ -222,9 +222,9 @@ body.theme-light .swirl-card-inner {
   transition: transform 0.1s linear;
 }
 @media (max-width: 900px) {
-  .swirl { height: 320vh; }
+  .swirl { height: 520vh; }
   .swirl-head { left: 22px; right: 22px; top: 100px; }
-  .swirl-card { width: 64vw; margin-left: -32vw; min-width: 0; }
+  .swirl-card { width: 72vw; margin-left: -36vw; min-width: 0; }
   .swirl-cta { right: 22px; bottom: 40px; }
 }
 
@@ -1062,6 +1062,18 @@ footer.site-footer {
   mix-blend-mode: overlay;
   pointer-events: none;
 }
+.about-portrait-secondary {
+  position: absolute;
+  right: -22px;
+  bottom: -22px;
+  width: 38%;
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  border: 4px solid var(--bg);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  z-index: 3;
+}
 .about-body {
   padding: 80px 60px 80px 20px;
   display: flex;
@@ -1260,7 +1272,8 @@ footer.site-footer {
 .social-chip:hover { background: var(--ochre); color: #0E0D0B; border-color: var(--ochre); }
 
 /* ===== Gear tags (About) ===== */
-.about-gear-section .gear-tags {
+.about-gear-section .gear-tags,
+.about-gear-inline .gear-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1277,6 +1290,47 @@ footer.site-footer {
   transition: color 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
 }
 .gear-tag:hover { color: var(--fg); border-color: var(--ochre); }
+.about-gear-inline {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+/* About CTAs row + photo strip */
+.about-ctas {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.about-social-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color 0.4s var(--ease-soft);
+}
+.about-social-link:hover { color: var(--ochre); }
+
+.about-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  height: 280px;
+  margin-top: 40px;
+}
+.about-strip-item {
+  background-size: cover;
+  background-position: center;
+  cursor: none;
+  transition: transform 0.7s var(--ease-soft), filter 0.5s var(--ease-soft);
+}
+.about-strip-item:hover { transform: scale(1.03); filter: brightness(1.08); }
+@media (max-width: 900px) {
+  .about-strip { grid-template-columns: repeat(3, 1fr); height: 360px; }
+}
 
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {

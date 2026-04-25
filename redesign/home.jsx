@@ -112,15 +112,24 @@ function SwirlGallery({ onOpenLightbox, go }) {
   const trackRef = React.useRef(null);
   const [progress, setProgress] = React.useState(0);
 
-  // One card per country, pinned by image path so it stays stable across data edits
+  // Multiple cards per country, pinned by image path so it stays stable
+  // across data edits. Mixed order keeps the scroll varied.
   const cards = React.useMemo(() => {
     const picks = [
       "Japan/IMG_6090.JPG",       // Sakura After Dark
       "China/DSCF8199.JPG",       // Hexagon Window
-      "Taiwan/IMG_4112.jpeg",     // Taiwan
+      "Taiwan/IMG_4112.jpeg",     // Taiwan, Taipei
+      "Japan/IMG_5583.JPG",       // Dotonbori, Osaka
       "Malaysia/DSCF1062.JPG",    // KL Skyline
+      "China/DSCF8511.JPG",       // Garden Pavilion
       "Singapore/IMG_6462.JPG",   // Tropical Garden
+      "Taiwan/IMG_4169.jpeg",     // Taiwan, Jiufen
+      "Japan/IMG_0393.JPG",       // Torii Gate, Hakone
       "Brunei/IMG_7969.jpeg",     // Brunei
+      "China/IMG_9089.JPG",       // Temple Incense
+      "Malaysia/DSCF1058.JPG",    // Steel Arch Bridge
+      "Brunei/IMG_8029.jpeg",     // Brunei
+      "Japan/IMG_6785.JPG",       // Late Night Corner
     ];
     return picks.map((p) => window.PORTFOLIO_BY_FILE[p]).filter(Boolean);
   }, []);
@@ -145,19 +154,20 @@ function SwirlGallery({ onOpenLightbox, go }) {
     };
   }, []);
 
-  // Compute each card's position on a swirl path with tighter spread
+  // Compute each card's position on a swirl path. Wider spread = consecutive
+  // cards overlap more, so they read as a denser, closer cluster.
   const getCardStyle = (i, n) => {
-    const spread = 0.48; // each card lingers longer — denser cluster
+    const spread = 0.55;
     const stagger = (1 - spread) / Math.max(1, n - 1);
     const local = (progress - i * stagger) / spread;
     const clamped = Math.max(-0.3, Math.min(1.3, local));
 
-    const x = -10 + clamped * 120; // vw, left -> right
+    const x = -4 + clamped * 108; // vw, left -> right (a touch tighter)
     const phase = i * 1.1;
-    const y = Math.sin(clamped * Math.PI * 2 + phase) * 14; // tighter amplitude
-    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 10;
+    const y = Math.sin(clamped * Math.PI * 2 + phase) * 9; // gentler arc
+    const rot = Math.cos(clamped * Math.PI * 2 + phase) * 8;
     const center = Math.sin(clamped * Math.PI);
-    const scale = 0.78 + Math.max(0, center) * 0.34;
+    const scale = 0.82 + Math.max(0, center) * 0.32; // bigger floor, similar peak
 
     let opacity = 1;
     if (clamped < 0) opacity = Math.max(0, 1 + clamped * 3);
