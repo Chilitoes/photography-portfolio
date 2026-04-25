@@ -12,13 +12,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: Deploy via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: ${{ secrets.FTP_REMOTE_DIR }}
-          local_path: "./*"
-          sftp_only: true
-          args: '-o StrictHostKeyChecking=no'
+        run: |
+          sshpass -p "${{ secrets.FTP_PASSWORD }}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} << 'EOF'
+          cd ${{ secrets.FTP_REMOTE_DIR }}
+          lcd .
+          put -r .
+          quit
+          EOF
